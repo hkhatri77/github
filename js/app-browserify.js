@@ -29,6 +29,55 @@ Promise.all(requests).then((data) => {
     qs('.repos ul').innerHTML = repo_string
 })
 
+function GithubClient(username) {
+    this.username = username
+    var urls = [
+        `https://api.github.com/users/username`
+        `https://api.github.com/users/username/repos`
+    ]
+    this.drawToScreen()
+
+    GithubClient.prototype = {
+        drawToScreen: function() {
+            var urls = ['https://api.github.com/users/username', 'https://api.github.com/users/username/repos']
+
+            var requests = urls.map((url) => fetch(url).then((r) => r.json()))
+
+            Promise.all(requests).then((data) => {
+                var profile = data[0],
+                    repos = data[1]
+
+                var profile_string = ['name', 'login', 'blog', 'location', 'email', 'html_url'].map((key) => `<li>${key}: ${profile[key]}</li>`).join('')
+                var repo_string = repos.map((repo) => `<li><a href="${repo.html_url}">${repo.name}</a></li>`).join('')
+
+                qs('.profile img').src = profile.avatar_url
+                qs('.profile ul').innerHTML = profile_string
+                qs('.repos ul').innerHTML = repo_string
+            })
+
+        }
+    }
+}
+
+window.addEventListener('hashchange', () => {
+    new GithubClient(location.hash.substr(1))
+})
+
+var Backbone = require("backbone")
+var GithubRouter = Backbone.Router.extend({
+    routes: {
+        'profile/:username': 'drawProfile',
+    },
+    drawProfile: function(user){
+        new GithubClient(user)
+    },
+
+    initialize: function(){
+        Backbone.history.start()
+    }
+})
+var router = new GithubRouter()
+
 
  // var promise_data = Promise.all(promises).then((data_array) => {
      //var profile_info = data_array[0]
