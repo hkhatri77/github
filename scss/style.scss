@@ -1,7 +1,5 @@
-
 @import "../bower_components/normalize-css/normalize.css";
 @import "../bower_components/typeplate-starter-kit/css/typeplate.css";
-
 /**
  * BOX-SIZING
  */
@@ -11,7 +9,6 @@
 *:after {
     box-sizing: border-box;
 }
-
 /**
  * GRIDS
  */
@@ -37,7 +34,9 @@
     }
 }
 
-@define-mixin gridify $col, $width, $gutter: 2 {
+@define-mixin gridify $col,
+$width,
+$gutter: 2 {
     @media only screen and (min-width: $(width)px) {
         .grid-$(col)-$(width) {
             & > * {
@@ -48,9 +47,11 @@
     }
 }
 
-@mixin gridify 2, 400 {}
-@mixin gridify 4, 600 {}
+@mixin gridify 2,
+400 {}
 
+@mixin gridify 4,
+600 {}
 /**
  * PACE (automatic pre-loader thingy)
  */
@@ -88,3 +89,59 @@ img {
 /**
  * YOUR CODE HERE
  */
+
+img {
+    float: left;
+    width: 250px;
+    height: 250px;
+    margin: 10px;
+    border-radius: 8px;
+}
+
+.container {
+    max-width: 50%;
+}
+
+.details {
+    clear: left;
+    max-width: 75%;
+}
+
+.repos {
+    display: inline-block;
+    position: absolute;
+    float: left;
+    margin-left: 28%;
+    top: 0;
+    margin-top: 20%;
+    width: 50%;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.repos ul li {
+    border: 1px solid #D6D6D6;
+    padding-left: 8px;
+}
+
+
+
+h6 {
+    margin-bottom: 0;
+    margin: auto;
+    position: absolute;
+    -webkit-transform: translate(40px, -5%);
+    -ms-transform: translate(40px, -5%);
+    transform: translate(40px, -32%);
+    border: 1px solid #D6D6D6;
+    width: 94%;
+    height: 29px;
+    border-top-left-radius: 4px;
+    background-color: #f0f0f0;
+    border-top-right-radius: 4px;
+    padding-top: 5px;
+    padding-left: 8px;
+    font-size: 15px;
+}
